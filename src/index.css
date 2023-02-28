@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*::selection {
+  @apply bg-[#0EA5E9] text-white;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body::-webkit-scrollbar {
+  @apply w-[7.5px];
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply rounded bg-[#0EA5E9];
+}
+
+body::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+html,
+body {
+  @apply h-full;
+}
+
+body {
+  @apply bg-[#F1F5F9] font-nunito text-[14px] font-normal leading-[19px] text-[#64748B];
+}
+
+#root {
+  @apply flex min-h-full flex-col overflow-hidden;
+}
