@@ -1,9 +1,8 @@
-import classNames from "classnames";
 import { ISidebar } from "./Sidebar.interface";
 
-export const Sidebar = ({ className }: ISidebar) => {
+export const Sidebar = ({ className, ...props }: ISidebar) => {
   return (
-    <aside className={classNames(className)}>
+    <aside className={className} {...props}>
       <nav>
         <ul>
           <li>Sidebar</li>

@@ -34,3 +34,7 @@ body {
 #root {
   @apply flex min-h-full flex-col overflow-hidden;
 }
+
+.container {
+  @apply xl:max-w-screen-xl;
+}
