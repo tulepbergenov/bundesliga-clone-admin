@@ -15,8 +15,8 @@ export const Header = ({ className, ...props }: IHeader) => {
     >
       <Link to="/" className="mr-[100px] flex items-center gap-x-[9px]">
         <LogoIcon className="h-auto w-[22px]" />
-        <p className="text-[14px] font-extrabold leading-[19px] text-[#475569]">
-          Laravel Nova
+        <p className="text-xl font-extrabold leading-[19px] text-[#475569]">
+          Bundesliga
         </p>
       </Link>
       <div className="relative w-full text-[#94A3B8]">

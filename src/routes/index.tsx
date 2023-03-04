@@ -1,5 +1,5 @@
 import { AppLayout } from "@/layouts";
-import { Home } from "@/pages";
+import { Home, Login } from "@/pages";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -11,5 +11,9 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
