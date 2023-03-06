@@ -1,25 +1,16 @@
 import { useGetAuthUser, useLogout } from "@/api/hooks";
 import { ArrowDownIcon } from "@/assets/imgs/icons";
-import { useUserStore } from "@/store";
 import { Menu, Transition } from "@headlessui/react";
 import classNames from "classnames";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 const mockAvatarImg =
   "https://images.unsplash.com/photo-1611915387288-fd8d2f5f928b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80";
 
 export const User = () => {
-  const store = useUserStore();
-  const { data: user } = useGetAuthUser();
+  const { data: user, isLoading } = useGetAuthUser();
   const { refetch } = useLogout();
-
-  useEffect(() => {
-    if (user) {
-      store.setAuthUser(user.data.data);
-      store.setRequestLoading(true);
-    }
-  }, [user]);
 
   const handleLogout = (e: any) => {
     e.preventDefault();
@@ -36,7 +27,9 @@ export const User = () => {
               type="button"
               className="grid grid-cols-[32px_1fr_20px] items-center"
             >
-              {store.requestLoading === true ? (
+              {isLoading ? (
+                <div className="h-[32px] w-[32px] rounded-full bg-[#F1F5F9]"></div>
+              ) : (
                 <div className="h-[32px] w-full overflow-hidden rounded-full">
                   <img
                     src={mockAvatarImg}
@@ -44,17 +37,15 @@ export const User = () => {
                     className="h-full w-full object-cover"
                   />
                 </div>
-              ) : (
-                <div className="h-[32px] w-[32px] rounded-full bg-[#F1F5F9]"></div>
               )}
-              {store.requestLoading === true ? (
-                <span className="mr-[8px] ml-[12px] text-[14px] font-semibold leading-[19px] text-[#475569]">
-                  {store.authUser?.name}
-                </span>
-              ) : (
+              {isLoading ? (
                 <div className="mr-[8px] ml-[12px] flex animate-pulse">
                   <div className="h-[14px] w-10 rounded-full bg-[#F1F5F9]"></div>
                 </div>
+              ) : (
+                <span className="mr-[8px] ml-[12px] text-[14px] font-semibold leading-[19px] text-[#475569]">
+                  {user?.data.data.name}
+                </span>
               )}
               <ArrowDownIcon
                 className={classNames(
