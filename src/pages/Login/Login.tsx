@@ -1,23 +1,19 @@
-import { AuthService } from "@/api/services";
+import { useLogin } from "@/api/hooks";
 import { EyeCloseIcon, EyeOpenIcon } from "@/assets/imgs/icons";
 import { Spinner } from "@/components/ui";
 import { ILoginFormData } from "@/interfaces";
 import { loginFormSchema } from "@/schemas";
-import { useUserStore } from "@/store";
-import { setToken } from "@/utilities";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const schema = loginFormSchema;
 
 export const Login = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useNavigate();
-  const store = useUserStore();
+  // const [isLoading, setIsLoading] = useState(false);
+  const { mutate, isLoading, isError, error } = useLogin();
 
   const handleTogglePasswordHidden = () => {
     setIsPasswordHidden(!isPasswordHidden);
@@ -32,19 +28,7 @@ export const Login = () => {
   });
 
   const onSubmit = (data: ILoginFormData) => {
-    setIsLoading(true);
-
-    AuthService.loginUser(data)
-      .then((res) => {
-        setToken(res.data.token);
-        store.setAuthUser(res.data.data);
-        store.setRequestLoading(true);
-        router("/");
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        toast.error(err.response.data.message);
-      });
+    mutate(data);
   };
 
   return (

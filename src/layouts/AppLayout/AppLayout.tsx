@@ -1,5 +1,4 @@
 import { Footer, Header, Sidebar } from "@/components";
-import { withGetUser } from "@/hocs";
 import { Outlet } from "react-router-dom";
 
 const AppLayout = () => {
@@ -15,4 +14,4 @@ const AppLayout = () => {
   );
 };
 
-export default withGetUser(AppLayout);
+export default AppLayout;
