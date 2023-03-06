@@ -7,14 +7,14 @@ import { AuthService } from "../services";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
-  const router = useNavigate();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: (submitData: ILoginFormData) =>
       AuthService.loginUser(submitData),
     onSuccess: (data) => {
       setToken(data.data.token);
-      router("/");
+      navigate("/");
       queryClient.invalidateQueries("auth-user" as any);
     },
     onError: (err: any) => {

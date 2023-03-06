@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthService } from "../services";
 
 export const useLogout = () => {
-  const router = useNavigate();
+  const navigate = useNavigate();
 
   const { refetch } = useQuery({
     queryKey: ["logout"],
@@ -12,7 +12,7 @@ export const useLogout = () => {
     enabled: false,
     onSuccess: () => {
       removeToken();
-      router("login");
+      navigate("login");
     },
   });
 

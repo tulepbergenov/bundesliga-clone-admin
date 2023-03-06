@@ -12,7 +12,6 @@ const schema = loginFormSchema;
 
 export const Login = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  // const [isLoading, setIsLoading] = useState(false);
   const { mutate, isLoading, isError, error } = useLogin();
 
   const handleTogglePasswordHidden = () => {
