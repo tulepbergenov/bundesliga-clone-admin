@@ -7,7 +7,7 @@ export const Spinner = ({ className, ...props }: IIcon) => {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      className={classNames("animate-spin text-white", className)}
+      className={classNames("animate-spin", className)}
       {...props}
     >
       <circle

@@ -1,6 +1,6 @@
 import { useLogin } from "@/api/hooks";
 import { EyeCloseIcon, EyeOpenIcon } from "@/assets/imgs/icons";
-import { Spinner } from "@/components/ui";
+import { Button, Spinner } from "@/components/ui";
 import { ILoginFormData } from "@/interfaces";
 import { loginFormSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +12,7 @@ const schema = loginFormSchema;
 
 export const Login = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  const { mutate, isLoading, isError, error } = useLogin();
+  const { mutate, isLoading } = useLogin();
 
   const handleTogglePasswordHidden = () => {
     setIsPasswordHidden(!isPasswordHidden);
@@ -92,12 +92,9 @@ export const Login = () => {
                 )}
               </div>
             </fieldset>
-            <button
-              type="submit"
-              className="flex min-w-[67px] items-center justify-center rounded-[4px] bg-[#0EA5E9] py-[8px] px-[16px] text-[14px] font-extrabold leading-[19px] text-white shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]"
-            >
-              {isLoading ? <Spinner className="h-5 w-5" /> : "Login"}
-            </button>
+            <Button type="submit">
+              {isLoading ? <Spinner className="h-5 w-5 text-white" /> : "Login"}
+            </Button>
           </form>
         </div>
       </section>

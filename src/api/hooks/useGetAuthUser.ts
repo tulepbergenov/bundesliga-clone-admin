@@ -5,5 +5,6 @@ export const useGetAuthUser = () => {
   return useQuery({
     queryKey: ["auth-user"],
     queryFn: () => AuthService.getUser(),
+    refetchOnWindowFocus: false,
   });
 };
