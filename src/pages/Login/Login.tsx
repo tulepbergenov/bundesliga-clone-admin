@@ -1,12 +1,11 @@
 import { useLogin } from "@/api/hooks";
 import { EyeCloseIcon, EyeOpenIcon } from "@/assets/imgs/icons";
-import { Button, Spinner } from "@/components/ui";
+import { Button, Logo, Spinner } from "@/components/ui";
 import { ILoginFormData } from "@/interfaces";
 import { loginFormSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 const schema = loginFormSchema;
 
@@ -38,14 +37,9 @@ export const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col items-center"
           >
-            <Link
-              to="/"
-              className="mb-[20px] text-3xl font-extrabold text-[#475569]"
-            >
-              Bundesliga
-            </Link>
+            <Logo />
             <h1 className="sr-only">Bundesliga</h1>
-            <fieldset className="mb-[20px] flex w-full flex-col">
+            <fieldset className="mb-[20px] mt-[25px] flex w-full flex-col">
               <label htmlFor="email" className="mb-[5px] font-semibold">
                 Email
               </label>

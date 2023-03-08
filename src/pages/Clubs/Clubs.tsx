@@ -1,15 +1,16 @@
 import { useGetClubs } from "@/api/hooks";
 import { BinIcon, EditIcon, EyeIcon } from "@/assets/imgs/icons";
 import {
-  Button,
+  Heading,
   InputSearch,
+  Link,
   Modal,
   ModalConfirmDelete,
   Spinner,
   TableControllers,
+  Tooltip,
 } from "@/components";
 import { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
 
 export const Clubs = () => {
   const { data, isLoading } = useGetClubs();
@@ -25,12 +26,12 @@ export const Clubs = () => {
 
   return (
     <>
-      <h1 className="mb-[12px] text-[24px] leading-[32px] text-[#64748B]">
-        Clubs
-      </h1>
+      <Heading className="mb-[12px]">Clubs</Heading>
       <div className="mb-[24px] flex items-center justify-between">
         <InputSearch bg="white" placeholder="Search club" />
-        <Button type="button">Add Club</Button>
+        <Link to="/clubs/add" apperience="button">
+          Add Club
+        </Link>
       </div>
       {isLoading && (
         <div className="flex justify-center">
@@ -97,25 +98,31 @@ export const Clubs = () => {
                   </td>
                   <td className="flex items-center justify-center px-[8px] py-[16px] text-center text-slate-500">
                     <div className="flex items-center gap-x-[16px] text-[#94A3B8]">
-                      <Link
-                        to="#1view"
-                        className="transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
-                      >
-                        <EyeIcon className="h-auto w-[24px]" />
-                      </Link>
-                      <Link
-                        to="#1edit"
-                        className="transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
-                      >
-                        <EditIcon className="h-auto w-[24px]" />
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={handleOpenModal}
-                        className="transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
-                      >
-                        <BinIcon className="h-auto w-[24px]" />
-                      </button>
+                      <Tooltip label="View">
+                        <Link
+                          to="#1view"
+                          className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
+                        >
+                          <EyeIcon className="h-auto w-full" />
+                        </Link>
+                      </Tooltip>
+                      <Tooltip label="Edit">
+                        <Link
+                          to="#1edit"
+                          className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
+                        >
+                          <EditIcon className="h-auto w-full" />
+                        </Link>
+                      </Tooltip>
+                      <Tooltip label="Delete">
+                        <button
+                          type="button"
+                          onClick={handleOpenModal}
+                          className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
+                        >
+                          <BinIcon className="h-auto w-full" />
+                        </button>
+                      </Tooltip>
                     </div>
                   </td>
                 </tr>

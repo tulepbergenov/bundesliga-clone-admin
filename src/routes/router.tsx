@@ -1,5 +1,6 @@
 import { AppLayout } from "@/layouts";
 import {
+  AddClub,
   Club,
   Clubs,
   Footballers,
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/clubs",
         element: <Clubs />,
+      },
+      {
+        path: "/clubs/add",
+        element: <AddClub />,
       },
       {
         path: "/clubs/:clubId",
