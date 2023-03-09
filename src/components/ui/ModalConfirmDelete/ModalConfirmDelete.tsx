@@ -1,9 +1,16 @@
-export const ModalConfirmDelete = () => {
+import { Button } from "../Button";
+import { ButtonGroup } from "../ButtonGroup";
+import { IModalConfirmDelete } from "./ModalConfirmDelete.interface";
+
+export const ModalConfirmDelete = ({ onClose }: IModalConfirmDelete) => {
   return (
-    <div className="w-[500px] px-[20px] py-[10px]">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum neque
-      asperiores nihil autem odio quos quae suscipit ex eius ad iure recusandae
-      sint, vel est, odit temporibus! Suscipit, porro eligendi!
+    <div className="flex min-h-[200px] w-[400px] justify-center p-[20px]">
+      <ButtonGroup>
+        <Button type="button" bg="ghost" onClick={onClose}>
+          Close
+        </Button>
+        <Button type="button">Delete</Button>
+      </ButtonGroup>
     </div>
   );
 };

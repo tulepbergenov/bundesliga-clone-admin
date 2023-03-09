@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { App } from "./App";
 import "./index.css";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>

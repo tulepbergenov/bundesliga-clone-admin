@@ -1,34 +1,62 @@
 import { useGetClubs } from "@/api/hooks";
-import { BinIcon, EditIcon, EyeIcon } from "@/assets/imgs/icons";
+import { EditIcon, EyeIcon } from "@/assets/imgs/icons";
 import {
   Heading,
   InputSearch,
   Link,
-  Modal,
-  ModalConfirmDelete,
   Spinner,
+  Table,
   TableControllers,
+  TableWrapper,
   Tooltip,
 } from "@/components";
-import { useCallback, useState } from "react";
+import { useDebounce, usePagination } from "@/hooks";
+import { IClub } from "@/interfaces";
+import { useEffect, useState } from "react";
 
 export const Clubs = () => {
   const { data, isLoading } = useGetClubs();
-  const [isOpen, setIsOpen] = useState(false);
+  const [clubs, setClubs] = useState<IClub[]>([]);
+  const {
+    dataCrop: clubCrop,
+    handleNextPage,
+    handlePrevPage,
+    totalPages,
+    pageCount,
+    currentPage,
+    setCurrentPage,
+  } = usePagination(clubs);
+  const [searchValue, setSearchValue] = useState("");
 
-  const handleCloseModal = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+  const deb = useDebounce(searchValue, 500);
 
-  const handleOpenModal = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+  useEffect(() => {
+    if (data) {
+      if (deb === "") {
+        setClubs(data.data.data);
+      } else {
+        if (deb !== "") {
+          setCurrentPage(1);
+        }
+        setClubs(
+          clubs.filter((club) =>
+            club.name.toLowerCase().includes(deb.toLowerCase())
+          )
+        );
+      }
+    }
+  }, [deb, data]);
 
   return (
     <>
       <Heading className="mb-[12px]">Clubs</Heading>
       <div className="mb-[24px] flex items-center justify-between">
-        <InputSearch bg="white" placeholder="Search club" />
+        <InputSearch
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          bg="white"
+          placeholder="Search club"
+        />
         <Link to="/clubs/add" apperience="button">
           Add Club
         </Link>
@@ -39,8 +67,8 @@ export const Clubs = () => {
         </div>
       )}
       {data && data?.data.data.length > 0 && (
-        <div className="w-full overflow-hidden rounded-[8px] bg-white text-[12px] text-sm shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-          <table className="w-full table-auto border-collapse border border-[#F1F5F9]">
+        <TableWrapper>
+          <Table>
             <thead className="border-b border-[#F1F5F9] bg-[#F8FAFC] text-[12px] font-extrabold leading-[16px]">
               <tr>
                 <th className="py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
@@ -68,7 +96,7 @@ export const Clubs = () => {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {data.data.data.map((club) => (
+              {clubCrop.map((club) => (
                 <tr key={club.id} className="border border-[#F1F5F9]">
                   <td className="py-[16px] px-[25px] text-center font-extrabold text-[#0EA5E9]">
                     {club.id}
@@ -100,7 +128,7 @@ export const Clubs = () => {
                     <div className="flex items-center gap-x-[16px] text-[#94A3B8]">
                       <Tooltip label="View">
                         <Link
-                          to="#1view"
+                          to={`/clubs/${club.id}`}
                           className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
                         >
                           <EyeIcon className="h-auto w-full" />
@@ -114,27 +142,21 @@ export const Clubs = () => {
                           <EditIcon className="h-auto w-full" />
                         </Link>
                       </Tooltip>
-                      <Tooltip label="Delete">
-                        <button
-                          type="button"
-                          onClick={handleOpenModal}
-                          className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
-                        >
-                          <BinIcon className="h-auto w-full" />
-                        </button>
-                      </Tooltip>
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
-          </table>
-          <TableControllers />
-        </div>
+          </Table>
+          <TableControllers
+            currentPage={currentPage}
+            pageCount={pageCount}
+            onPrevPage={handlePrevPage}
+            onNextPage={handleNextPage}
+            totalPages={totalPages}
+          />
+        </TableWrapper>
       )}
-      <Modal open={isOpen} onClose={handleCloseModal}>
-        <ModalConfirmDelete />
-      </Modal>
     </>
   );
 };

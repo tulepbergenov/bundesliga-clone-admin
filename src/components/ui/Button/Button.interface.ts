@@ -9,7 +9,9 @@ export interface IButton
       ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
     >,
-    PropsWithChildren {}
+    PropsWithChildren {
+  bg?: "blue" | "ghost";
+}
 
 export interface IPaginationButton
   extends DetailedHTMLProps<

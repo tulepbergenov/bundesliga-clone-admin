@@ -1,3 +1,9 @@
+import { useLoaderData } from "react-router-dom";
+
 export const Club = () => {
-  return <h1>Club</h1>;
+  const data: any = useLoaderData();
+
+  console.log(data);
+
+  return <h1>{data.data.data.name}</h1>;
 };
