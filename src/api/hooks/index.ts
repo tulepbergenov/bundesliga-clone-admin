@@ -1,3 +1,4 @@
+export * from "./useAddClub";
 export * from "./useGetAuthUser";
 export * from "./useGetClubs";
 export * from "./useGetFootballers";

@@ -7,8 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const schema = loginFormSchema;
-
 export const Login = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const { mutate, isLoading } = useLogin();
@@ -22,7 +20,7 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginFormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(loginFormSchema),
   });
 
   const onSubmit = (data: ILoginFormData) => {
@@ -37,7 +35,7 @@ export const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col items-center"
           >
-            <Logo />
+            <Logo size="bg" />
             <h1 className="sr-only">Bundesliga</h1>
             <fieldset className="mb-[20px] mt-[25px] flex w-full flex-col">
               <label htmlFor="email" className="mb-[5px] font-semibold">

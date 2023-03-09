@@ -4,6 +4,4 @@ export interface IInput
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  > {
-  bg: "white" | "gray";
-}
+  > {}

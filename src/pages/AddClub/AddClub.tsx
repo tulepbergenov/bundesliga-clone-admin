@@ -1,32 +1,93 @@
-import { Button, Heading, Link } from "@/components";
+import { useAddClub } from "@/api/hooks";
+import {
+  Button,
+  ButtonGroup,
+  ColorPicker,
+  ErrorMessage,
+  Fieldset,
+  Form,
+  Heading,
+  Input,
+  InputDivider,
+  InputField,
+  Label,
+  Link,
+  Spinner,
+} from "@/components";
+import { IClubData } from "@/interfaces";
+import { clubFormSchema } from "@/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export const AddClub = () => {
+  const { mutate, isLoading } = useAddClub();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IClubData>({
+    resolver: zodResolver(clubFormSchema),
+  });
+
+  const onSubmit = (data: IClubData) => {
+    mutate(data, {
+      onSuccess: () => {
+        navigate("/clubs");
+      },
+    });
+  };
+
   return (
     <>
       <Heading className="mb-[12px]">Add Club</Heading>
-      <form className="flex flex-col gap-y-[24px]">
-        <fieldset className="min-h-[400px] rounded-[8px] bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-          <div className="boder-[#F1F5F9] grid grid-cols-[240px_1fr] items-center gap-x-[20px] border-b px-[24px] py-[20px] last:border-none">
-            <label className="text-[14px] font-normal leading-[19px] text-[#64748B] after:ml-[3px] after:text-[#EF4444] after:content-['*']">
-              Title
-            </label>
-            <input
-              type="text"
-              placeholder="Club name"
-              className="inline-block rounded-[4px] border border-[#CBD5E1] bg-white px-[12px] py-[8px] text-[14px] font-normal leading-[19px] text-[#64748B]"
-            />
-          </div>
-        </fieldset>
-        <div className="flex items-center gap-x-[24px] self-end">
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Fieldset>
+          <InputDivider>
+            <Label required>Name</Label>
+            <InputField>
+              <Input type="text" {...register("name")} />
+              {errors.name && (
+                <ErrorMessage>{errors.name.message}</ErrorMessage>
+              )}
+            </InputField>
+          </InputDivider>
+          <InputDivider>
+            <Label required>Stadium</Label>
+            <InputField>
+              <Input type="text" {...register("stadium")} />
+              {errors.short_name && (
+                <ErrorMessage>{errors.short_name.message}</ErrorMessage>
+              )}
+            </InputField>
+          </InputDivider>
+          <InputDivider>
+            <Label required>Short name</Label>
+            <InputField>
+              <Input type="text" {...register("short_name")} />
+              {errors.stadium && (
+                <ErrorMessage>{errors.stadium.message}</ErrorMessage>
+              )}
+            </InputField>
+          </InputDivider>
+          <InputDivider>
+            <Label required>Color</Label>
+            <ColorPicker {...register("color")} />
+          </InputDivider>
+        </Fieldset>
+        <ButtonGroup itemPosition="end">
           <Link
             to="/clubs"
             className="inline-block text-[14px] font-extrabold leading-[19px] text-[#94A3B8]"
           >
             Cancel
           </Link>
-          <Button type="submit">Add</Button>
-        </div>
-      </form>
+          <Button type="submit">
+            {isLoading ? <Spinner className="h-5 w-5 text-white" /> : "Add"}
+          </Button>
+        </ButtonGroup>
+      </Form>
     </>
   );
 };

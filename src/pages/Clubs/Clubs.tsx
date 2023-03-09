@@ -41,7 +41,7 @@ export const Clubs = () => {
       {data && data?.data.data.length > 0 && (
         <div className="w-full overflow-hidden rounded-[8px] bg-white text-[12px] text-sm shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
           <table className="w-full table-auto border-collapse border border-[#F1F5F9]">
-            <thead className="border-b border-[#F1F5F9] bg-[#F8FAFC] font-extrabold">
+            <thead className="border-b border-[#F1F5F9] bg-[#F8FAFC] text-[12px] font-extrabold leading-[16px]">
               <tr>
                 <th className="py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
                   ID

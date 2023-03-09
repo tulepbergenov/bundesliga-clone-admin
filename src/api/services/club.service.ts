@@ -1,11 +1,15 @@
-import { IClubs } from "@/interfaces";
+import { IClub, IClubData, IClubs } from "@/interfaces";
 import { AxiosResponse } from "axios";
 import api from "../axios";
 
 const getClubs = (): Promise<AxiosResponse<IClubs, any>> => api.get("/clubs");
 
+const addClub = (data: IClubData): Promise<AxiosResponse<IClub, any>> =>
+  api.post("/clubs/create", data);
+
 const clubService = {
   getClubs,
+  addClub,
 };
 
 export default clubService;

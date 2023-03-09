@@ -15,7 +15,9 @@ export const useLogin = () => {
     onSuccess: (data) => {
       setToken(data.data.token);
       navigate("/");
-      queryClient.invalidateQueries("auth-user" as any);
+      queryClient.invalidateQueries({
+        queryKey: ["auth-user"],
+      });
     },
     onError: (err: any) => {
       removeToken();
