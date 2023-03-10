@@ -1,9 +1,12 @@
+import { useTheme } from "@/hooks";
 import classNames from "classnames";
 import { Logo } from "../Logo";
 import { User } from "../User";
 import { IHeader } from "./Header.interface";
 
 export const Header = ({ className, ...props }: IHeader) => {
+  const { toggleTheme } = useTheme();
+
   return (
     <header
       className={classNames(
@@ -13,7 +16,12 @@ export const Header = ({ className, ...props }: IHeader) => {
       {...props}
     >
       <Logo />
-      <User />
+      <div className="flex items-center gap-x-[10px]">
+        <button type="button" onClick={toggleTheme}>
+          Toggle Theme
+        </button>
+        <User />
+      </div>
     </header>
   );
 };
