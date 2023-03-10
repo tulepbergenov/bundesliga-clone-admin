@@ -1,3 +1,11 @@
+import { Heading } from "@/components";
+
 export const Footballers = () => {
-  return <h1>Footballers</h1>;
+  return (
+    <>
+      <Heading as="h1" className="mb-[12px]">
+        Footballers
+      </Heading>
+    </>
+  );
 };

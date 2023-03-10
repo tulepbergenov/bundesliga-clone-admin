@@ -7,4 +7,6 @@ export interface ITableControllers
   pageCount: number;
   currentPage: number;
   totalPages: number;
+  startIndex: number;
+  endIndex: number;
 }

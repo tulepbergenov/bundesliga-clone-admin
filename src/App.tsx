@@ -1,11 +1,11 @@
 import { RouterProvider } from "react-router-dom";
 import { Toast } from "./components/ui";
-import { router } from "./routes";
+import { rootRouter } from "./routes";
 
 export const App = () => {
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={rootRouter} />
       <Toast />
     </>
   );

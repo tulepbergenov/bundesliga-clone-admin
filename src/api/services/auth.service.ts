@@ -1,6 +1,6 @@
 import { ILoginFormData, ILoginResponse } from "@/interfaces";
 import { AxiosResponse } from "axios";
-import api from "../axios";
+import { api } from "../axios";
 
 const loginUser = (
   data: ILoginFormData
@@ -22,10 +22,8 @@ const getUser = (): Promise<AxiosResponse<ILoginResponse, any>> => {
   return res;
 };
 
-const AuthService = {
+export const AuthService = {
   loginUser,
   logoutUser,
   getUser,
 };
-
-export default AuthService;

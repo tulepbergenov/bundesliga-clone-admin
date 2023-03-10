@@ -1,4 +1,4 @@
-import { useGetClubs } from "@/api/hooks";
+import { useGetArticles } from "@/api/hooks";
 import { EditIcon, EyeIcon } from "@/assets/imgs/icons";
 import {
   Heading,
@@ -11,14 +11,15 @@ import {
   Tooltip,
 } from "@/components";
 import { useDebounce, usePagination } from "@/hooks";
-import { IClub } from "@/interfaces";
+import { IArticle } from "@/interfaces";
 import { useEffect, useMemo, useState } from "react";
 
-export const Clubs = () => {
-  const { data, isLoading } = useGetClubs();
-  const [clubs, setClubs] = useState<IClub[]>([]);
+export const Articles = () => {
+  const { data, isLoading } = useGetArticles();
+  const [articles, setArticles] = useState<IArticle[]>([]);
+  const [searchValue, setSearchValue] = useState("");
   const {
-    dataCrop: clubCrop,
+    dataCrop: cropArticles,
     handleNextPage,
     handlePrevPage,
     totalPages,
@@ -26,10 +27,26 @@ export const Clubs = () => {
     currentPage,
     setCurrentPage,
     pageSize,
-  } = usePagination(clubs);
-  const [searchValue, setSearchValue] = useState("");
+  } = usePagination(articles);
 
   const deb = useDebounce(searchValue, 500);
+
+  useEffect(() => {
+    if (data) {
+      if (deb === "") {
+        setArticles(data.data.data);
+      } else {
+        if (deb !== "") {
+          setCurrentPage(1);
+        }
+        setArticles(
+          articles.filter((article) =>
+            article.title.toLowerCase().includes(deb.toLowerCase())
+          )
+        );
+      }
+    }
+  }, [deb, data]);
 
   const startIndex = useMemo(
     () => (currentPage - 1) * pageSize,
@@ -41,26 +58,11 @@ export const Clubs = () => {
     data?.data.data.length - 1
   );
 
-  useEffect(() => {
-    if (data) {
-      if (deb === "") {
-        setClubs(data.data.data);
-      } else {
-        if (deb !== "") {
-          setCurrentPage(1);
-        }
-        setClubs(
-          clubs.filter((club) =>
-            club.name.toLowerCase().includes(deb.toLowerCase())
-          )
-        );
-      }
-    }
-  }, [deb, data]);
-
   return (
     <>
-      <Heading className="mb-[12px]">Clubs</Heading>
+      <Heading as="h1" className="mb-[12px]">
+        News
+      </Heading>
       <div className="mb-[24px] flex items-center justify-between">
         <InputSearch
           value={searchValue}
@@ -68,8 +70,8 @@ export const Clubs = () => {
           bg="white"
           placeholder="Search club"
         />
-        <Link to="/clubs/add" apperience="button">
-          Add Club
+        <Link to="/news/add" apperience="button">
+          Add News
         </Link>
       </div>
       {isLoading && (
@@ -77,7 +79,7 @@ export const Clubs = () => {
           <Spinner className="h-[50px] w-[50px] text-[#0EA5E9]" />
         </div>
       )}
-      {data && data?.data.data.length > 0 && (
+      {data && data.data.data.length > 0 && (
         <TableWrapper>
           <Table>
             <thead className="border-b border-[#F1F5F9] bg-[#F8FAFC] text-[12px] font-extrabold leading-[16px]">
@@ -86,60 +88,31 @@ export const Clubs = () => {
                   ID
                 </th>
                 <th className="py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
-                  Name
+                  Title
                 </th>
-                <th className="p-[8px] text-center uppercase leading-[16px] text-[#64748B]">
-                  Stadium
-                </th>
-                <th className="p-[8px] text-center uppercase leading-[16px] text-[#64748B]">
-                  Color
-                </th>
-                <th className="p-[8px] text-center uppercase leading-[16px] text-[#64748B]">
-                  Wins
-                </th>
-                <th className="p-[8px] text-center uppercase leading-[16px] text-[#64748B]">
-                  Draw
-                </th>
-                <th className="p-[8px] text-center uppercase leading-[16px] text-[#64748B]">
-                  Lose
+                <th className="py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
+                  Description
                 </th>
                 <th className="p-[8px] px-[50px] text-center uppercase leading-[16px] text-[#64748B]"></th>
               </tr>
             </thead>
             <tbody className="bg-white">
-              {clubCrop.map((club) => (
-                <tr key={club.id} className="border border-[#F1F5F9]">
-                  <td className="py-[16px] px-[25px] text-center font-extrabold text-[#0EA5E9]">
-                    {club.id}
+              {cropArticles.map((article) => (
+                <tr key={article.id} className="border border-[#F1F5F9]">
+                  <td className="py-[16px] px-[25px] text-center align-top font-extrabold text-[#0EA5E9]">
+                    {article.id}
+                  </td>
+                  <td className="py-[16px] px-[25px] text-center align-top text-slate-500">
+                    {article.title}
                   </td>
                   <td className="py-[16px] px-[25px] text-center text-slate-500">
-                    {club.name}
-                  </td>
-                  <td className="px-[8px] py-[16px] text-center text-slate-500">
-                    {club.stadium}
-                  </td>
-                  <td className="px-[8px] py-[16px] text-center text-slate-500">
-                    <span
-                      style={{
-                        backgroundColor: club.color,
-                      }}
-                      className="inline-block h-[15px] w-[15px] rounded-[44px]"
-                    ></span>
-                  </td>
-                  <td className="px-[8px] py-[16px] text-center text-slate-500">
-                    {club.win}
-                  </td>
-                  <td className="px-[8px] py-[16px] text-center text-slate-500">
-                    {club.lose}
-                  </td>
-                  <td className="px-[8px] py-[16px] text-center text-slate-500">
-                    {club.draw}
+                    {article.short_description}
                   </td>
                   <td className="flex items-center justify-center px-[8px] py-[16px] text-center text-slate-500">
                     <div className="flex items-center gap-x-[16px] text-[#94A3B8]">
                       <Tooltip label="View">
                         <Link
-                          to={`/clubs/${club.id}`}
+                          to={`/news/${article.id}`}
                           className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
                         >
                           <EyeIcon className="h-auto w-full" />

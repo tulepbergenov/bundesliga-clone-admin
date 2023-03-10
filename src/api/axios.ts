@@ -1,7 +1,7 @@
 import { getToken } from "@/utilities";
 import axios from "axios";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
   headers: {
     "Access-Control-Allow-Origin": "*",
@@ -20,5 +20,3 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
-export default api;

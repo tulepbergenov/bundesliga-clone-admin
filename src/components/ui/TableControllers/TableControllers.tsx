@@ -9,6 +9,8 @@ export const TableControllers = ({
   onPrevPage,
   pageCount,
   totalPages,
+  startIndex,
+  endIndex,
   ...props
 }: ITableControllers) => {
   return (
@@ -24,7 +26,8 @@ export const TableControllers = ({
           Previous
         </PaginationButton>
         <p>
-          <span>1</span>&nbsp;-&nbsp;<span>1&nbsp;</span>&nbsp;of
+          <span>{startIndex}</span>&nbsp;-&nbsp;<span>{endIndex}&nbsp;</span>
+          &nbsp;of
           <span>&nbsp;{pageCount}</span>
         </p>
         <PaginationButton

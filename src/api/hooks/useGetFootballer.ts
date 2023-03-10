@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { footballerService } from "../services";
 
-export const useGetFootballers = () => {
+export const useGetFootballer = (id: number) => {
   return useQuery({
-    queryKey: ["footballers"],
-    queryFn: () => footballerService.getFootballers(),
+    queryKey: ["articles", id],
+    queryFn: () => footballerService.getFootballer(id),
     refetchOnWindowFocus: false,
   });
 };

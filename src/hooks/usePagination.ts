@@ -22,6 +22,16 @@ export const usePagination = (data: any[] = []) => {
     [pageCount]
   );
 
+  const startIndex = useMemo(
+    () => (currentPage - 1) * pageSize + 1,
+    [currentPage, pageSize]
+  );
+
+  const endIndex = useMemo(
+    () => Math.min(startIndex + pageSize - 1, data.length - 1),
+    [pageSize, startIndex, data]
+  );
+
   const value = useMemo(() => {
     return {
       currentPage,
@@ -31,8 +41,20 @@ export const usePagination = (data: any[] = []) => {
       dataCrop,
       pageCount,
       setCurrentPage,
+      pageSize,
+      startIndex,
+      endIndex,
     };
-  }, [data, currentPage, dataCrop, pageCount, totalPages]);
+  }, [
+    data,
+    currentPage,
+    dataCrop,
+    pageCount,
+    totalPages,
+    pageSize,
+    startIndex,
+    endIndex,
+  ]);
 
   return value;
 };

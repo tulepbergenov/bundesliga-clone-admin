@@ -1,13 +1,12 @@
-import { useGetClubs, useGetFootballers } from "@/api/hooks";
-import { useGetNews } from "@/api/hooks/useGetNews";
+import { useGetArticles, useGetClubs, useGetFootballers } from "@/api/hooks";
 import { FootballIcon, NewsIcon, UsersIcon } from "@/assets/imgs/icons";
 import { Spinner } from "@/components";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { data: clubs } = useGetClubs();
+  const { data: articles } = useGetArticles();
   const { data: footballers } = useGetFootballers();
-  const { data: news } = useGetNews();
 
   return (
     <section>
@@ -64,8 +63,8 @@ export const Home = () => {
               <NewsIcon className="h-auto w-[24px]" />
             </div>
             <div className="text-[36px] leading-[48px] text-[#64748B]">
-              {news ? (
-                news.data.data.length
+              {articles ? (
+                articles.data.data.length
               ) : (
                 <Spinner className="h-[20px] w-[20px] text-[#64748B]" />
               )}
