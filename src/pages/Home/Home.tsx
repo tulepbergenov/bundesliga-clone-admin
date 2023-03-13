@@ -30,7 +30,7 @@ export const Home = () => {
           </div>
           <Link
             to="/clubs"
-            className="absolute top-0 left-0 z-10 h-full w-full"
+            className="absolute top-0 left-0 z-[5] h-full w-full"
           ></Link>
         </li>
         <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
@@ -51,7 +51,7 @@ export const Home = () => {
           </div>
           <Link
             to="/footballers"
-            className="absolute top-0 left-0 z-10 h-full w-full"
+            className="absolute top-0 left-0 z-[5] h-full w-full"
           ></Link>
         </li>
         <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
@@ -72,7 +72,7 @@ export const Home = () => {
           </div>
           <Link
             to="/news"
-            className="absolute top-0 left-0 z-10 h-full w-full"
+            className="absolute top-0 left-0 z-[5] h-full w-full"
           ></Link>
         </li>
       </ul>
