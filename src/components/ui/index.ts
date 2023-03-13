@@ -19,6 +19,7 @@ export * from "./Spinner";
 export * from "./Table";
 export * from "./TableControllers";
 export * from "./TableWrapper";
+export * from "./ThemeSwitcher";
 export * from "./Toast";
 export * from "./Tooltip";
 export * from "./User";

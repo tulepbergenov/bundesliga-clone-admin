@@ -12,15 +12,15 @@ export const Home = () => {
     <section>
       <h1 className="sr-only">Bundesliga Admin</h1>
       <ul className="grid auto-rows-[minmax(auto,_160px)] grid-cols-3 gap-[24px]">
-        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B]">
+        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
+          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B] dark:text-[#94A3B8]">
             Current Clubs
           </p>
           <div className="flex items-center gap-x-[16px]">
             <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-[#22C55E] text-white">
               <FootballIcon className="h-auto w-[24px]" />
             </div>
-            <div className="text-[36px] leading-[48px] text-[#64748B]">
+            <div className="text-[36px] leading-[48px] text-[#64748B] dark:text-[#94A3B8]">
               {clubs ? (
                 clubs.data.data.length
               ) : (
@@ -33,15 +33,15 @@ export const Home = () => {
             className="absolute top-0 left-0 z-10 h-full w-full"
           ></Link>
         </li>
-        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B]">
+        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
+          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B] dark:text-[#94A3B8]">
             Current Footballers
           </p>
           <div className="flex items-center gap-x-[16px]">
             <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-[#0EA5E9] text-white">
               <UsersIcon className="h-auto w-[24px]" />
             </div>
-            <div className="text-[36px] leading-[48px] text-[#64748B]">
+            <div className="text-[36px] leading-[48px] text-[#64748B] dark:text-[#94A3B8]">
               {footballers ? (
                 footballers.data.data.length
               ) : (
@@ -54,15 +54,15 @@ export const Home = () => {
             className="absolute top-0 left-0 z-10 h-full w-full"
           ></Link>
         </li>
-        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B]">
+        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
+          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B] dark:text-[#94A3B8]">
             Current News
           </p>
           <div className="flex items-center gap-x-[16px]">
             <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-orange-400 text-white">
               <NewsIcon className="h-auto w-[24px]" />
             </div>
-            <div className="text-[36px] leading-[48px] text-[#64748B]">
+            <div className="text-[36px] leading-[48px] text-[#64748B] dark:text-[#94A3B8]">
               {articles ? (
                 articles.data.data.length
               ) : (

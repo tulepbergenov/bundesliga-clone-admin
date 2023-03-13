@@ -12,7 +12,7 @@ export const Heading = ({
     as,
     {
       className: classNames(
-        "text-[24px] leading-[32px] text-[#64748B]",
+        "text-[24px] leading-[32px] text-[#64748B] dark:text-[#94A3B8]",
         className
       ),
       ...props,

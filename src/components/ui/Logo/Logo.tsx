@@ -15,7 +15,7 @@ export const Logo = ({ className, size = "sm", ...props }: ILogo) => {
         {...props}
       >
         <LogoIcon className="h-auto w-[40px]" />
-        <p className="text-3xl font-extrabold leading-[19px] text-[#475569]">
+        <p className="text-3xl font-extrabold leading-[19px] text-[#475569] dark:text-white">
           Bundesliga
         </p>
       </Link>
@@ -32,7 +32,7 @@ export const Logo = ({ className, size = "sm", ...props }: ILogo) => {
       {...props}
     >
       <LogoIcon className="h-auto w-[22px]" />
-      <p className="text-xl font-extrabold leading-[19px] text-[#475569]">
+      <p className="text-xl font-extrabold leading-[19px] text-[#475569] dark:text-white">
         Bundesliga
       </p>
     </Link>

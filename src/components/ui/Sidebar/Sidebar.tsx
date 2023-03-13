@@ -16,8 +16,8 @@ export const Sidebar = ({ className, ...props }: ISidebar) => {
                   classNames(
                     "grid grid-cols-[24px_1fr] items-center gap-x-[8px] rounded-[5px] px-[15px] py-[10px] text-[16px] font-semibold leading-[21px] text-[#64748B]",
                     {
-                      ["bg-[#0EA5E9] text-white"]: isActive,
-                      ["transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"]:
+                      ["bg-[#0EA5E9] text-white dark:text-[#0F172A]"]: isActive,
+                      ["transition-colors duration-300 ease-in-out hover:text-[#0EA5E9] dark:text-[#94A3B8]"]:
                         !isActive,
                     }
                   )

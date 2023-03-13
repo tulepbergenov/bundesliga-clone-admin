@@ -28,7 +28,7 @@ body {
 }
 
 body {
-  @apply bg-[#F1F5F9] font-nunito text-[14px] font-normal leading-[19px] text-[#64748B];
+  @apply bg-[#F1F5F9] font-nunito text-[14px] font-normal leading-[19px] text-[#64748B] dark:bg-[#0F172A];
 }
 
 #root {

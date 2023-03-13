@@ -13,6 +13,8 @@ import {
   VscEye as EyeOpenIcon,
   VscEyeClosed as EyeCloseIcon,
 } from "react-icons/vsc";
+import { DarkIcon } from "./DarkIcon";
+import { LightIcon } from "./LightIcon";
 import LogoIcon from "./LogoIcon";
 
 export {
@@ -29,4 +31,6 @@ export {
   EditIcon,
   EyeIcon,
   BinIcon,
+  DarkIcon,
+  LightIcon,
 };

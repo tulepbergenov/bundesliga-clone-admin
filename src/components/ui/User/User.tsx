@@ -43,7 +43,7 @@ export const User = () => {
                   <div className="h-[14px] w-10 rounded-full bg-[#F1F5F9]"></div>
                 </div>
               ) : (
-                <span className="mr-[8px] ml-[12px] text-[14px] font-semibold leading-[19px] text-[#475569]">
+                <span className="mr-[8px] ml-[12px] text-[14px] font-semibold leading-[19px] text-[#475569] dark:text-[#94A3B8]">
                   {user?.data.data.name}
                 </span>
               )}
