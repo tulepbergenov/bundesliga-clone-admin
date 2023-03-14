@@ -1,5 +1,5 @@
 import { useGetArticles } from "@/api/hooks";
-import { EditIcon, EyeIcon } from "@/assets/imgs/icons";
+import { BinIcon, EditIcon, EyeIcon } from "@/assets/imgs/icons";
 import {
   Heading,
   InputSearch,
@@ -82,34 +82,34 @@ export const Articles = () => {
       {data && data.data.data.length > 0 && (
         <TableWrapper>
           <Table>
-            <thead className="border-b border-[#F1F5F9] bg-[#F8FAFC] text-[12px] font-extrabold leading-[16px]">
+            <thead className="border-b border-[#F1F5F9] text-[12px] font-extrabold leading-[16px]">
               <tr>
-                <th className="py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
+                <th className="rounded-[8px_0_0_0] bg-[#F8FAFC] py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
                   ID
                 </th>
-                <th className="py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
+                <th className="bg-[#F8FAFC] py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
                   Title
                 </th>
-                <th className="py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
+                <th className="bg-[#F8FAFC] py-[8px] px-[25px] text-center uppercase leading-[16px] text-[#64748B]">
                   Description
                 </th>
-                <th className="p-[8px] px-[50px] text-center uppercase leading-[16px] text-[#64748B]"></th>
+                <th className="rounded-[0_8px_0_0] bg-[#F8FAFC] p-[8px] px-[50px] text-center uppercase leading-[16px] text-[#64748B]"></th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody>
               {cropArticles.map((article) => (
                 <tr key={article.id} className="border border-[#F1F5F9]">
-                  <td className="py-[16px] px-[25px] text-center align-top font-extrabold text-[#0EA5E9]">
+                  <td className="bg-white py-[16px] px-[25px] text-center align-top font-extrabold text-[#0EA5E9]">
                     {article.id}
                   </td>
-                  <td className="py-[16px] px-[25px] text-center align-top text-slate-500">
+                  <td className="bg-white py-[16px] px-[25px] text-center align-top text-slate-500">
                     {article.title}
                   </td>
-                  <td className="py-[16px] px-[25px] text-center text-slate-500">
+                  <td className="bg-white py-[16px] px-[25px] text-center text-slate-500">
                     {article.short_description}
                   </td>
-                  <td className="flex items-center justify-center px-[8px] py-[16px] text-center text-slate-500">
-                    <div className="flex items-center gap-x-[16px] text-[#94A3B8]">
+                  <td className="bg-white px-[20px] py-[16px] text-center text-slate-500">
+                    <div className="flex h-full items-center justify-center gap-x-[16px] text-[#94A3B8]">
                       <Tooltip label="View">
                         <Link
                           to={`/news/${article.id}`}
@@ -125,6 +125,14 @@ export const Articles = () => {
                         >
                           <EditIcon className="h-auto w-full" />
                         </Link>
+                      </Tooltip>
+                      <Tooltip label="Delete">
+                        <button
+                          type="button"
+                          className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#EF4444]"
+                        >
+                          <BinIcon className="h-auto w-full" />
+                        </button>
                       </Tooltip>
                     </div>
                   </td>

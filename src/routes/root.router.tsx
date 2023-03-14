@@ -7,6 +7,7 @@ import {
   Articles,
   Club,
   Clubs,
+  EditClub,
   Footballers,
   Home,
   Login,
@@ -36,6 +37,24 @@ export const rootRouter = createBrowserRouter([
       {
         path: "/clubs/:clubId",
         element: <Club />,
+        loader: async ({ params }: { params: any }) => {
+          const contactDetailQuery = (id: number) => ({
+            queryKey: ["clubs", id],
+            queryFn: async () => clubService.getClub(id),
+          });
+
+          const query = contactDetailQuery(params.clubId);
+
+          return (
+            queryClient.getQueryData(query.queryKey) ??
+            (await queryClient.fetchQuery(query))
+          );
+        },
+        errorElement: <PageNotFound />,
+      },
+      {
+        path: "/clubs/:clubId/edit",
+        element: <EditClub />,
         loader: async ({ params }: { params: any }) => {
           const contactDetailQuery = (id: number) => ({
             queryKey: ["clubs", id],

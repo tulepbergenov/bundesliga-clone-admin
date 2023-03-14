@@ -9,4 +9,6 @@ const getArticle = (
   id: number
 ): Promise<AxiosResponse<IArticleResponse, any>> => api.get(`/articles/${id}`);
 
-export const articleService = { getArticles, getArticle };
+const removeArticle = (id: number) => api.delete(`/articles/${id}`);
+
+export const articleService = { getArticles, getArticle, removeArticle };

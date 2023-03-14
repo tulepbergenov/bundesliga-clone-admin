@@ -5,6 +5,7 @@ export * from "./Article";
 export * from "./Articles";
 export * from "./Club";
 export * from "./Clubs";
+export * from "./EditClub";
 export * from "./Footballers";
 export * from "./Home";
 export * from "./Login";

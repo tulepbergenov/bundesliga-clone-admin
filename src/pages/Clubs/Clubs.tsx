@@ -147,7 +147,7 @@ export const Clubs = () => {
                       </Tooltip>
                       <Tooltip label="Edit">
                         <Link
-                          to="#1edit"
+                          to={`/clubs/${club.id}/edit`}
                           className="flex h-[24px] w-[24px] items-center justify-center transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
                         >
                           <EditIcon className="h-auto w-full" />

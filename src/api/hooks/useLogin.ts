@@ -1,5 +1,5 @@
 import { ILoginFormData } from "@/interfaces";
-import { removeToken, setToken } from "@/utilities";
+import { removeToken, setToken } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

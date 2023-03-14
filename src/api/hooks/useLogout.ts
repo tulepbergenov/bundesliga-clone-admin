@@ -1,6 +1,7 @@
-import { removeToken } from "@/utilities";
+import { removeToken } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthService } from "../services";
 
 export const useLogout = () => {
@@ -10,8 +11,9 @@ export const useLogout = () => {
     queryKey: ["logout"],
     queryFn: () => AuthService.logoutUser(),
     enabled: false,
-    onSuccess: () => {
+    onSuccess: (data) => {
       removeToken();
+      toast.success(data.data.message);
       navigate("login");
     },
   });

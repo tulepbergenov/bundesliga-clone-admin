@@ -1,4 +1,4 @@
-import { IClub, IClubData, IClubs } from "@/interfaces";
+import { IClub, IClubData, IClubDataEdit, IClubs } from "@/interfaces";
 import { AxiosResponse } from "axios";
 import { api } from "../axios";
 
@@ -10,8 +10,14 @@ const addClub = (data: IClubData): Promise<AxiosResponse<IClub, any>> =>
 const getClub = (id: number): Promise<AxiosResponse<any, any>> =>
   api.get(`/clubs/${id}`);
 
+const editClub = (
+  data: IClubDataEdit,
+  id: number
+): Promise<AxiosResponse<any, any>> => api.put(`/clubs/${id}`, data);
+
 export const clubService = {
   getClubs,
   addClub,
   getClub,
+  editClub,
 };

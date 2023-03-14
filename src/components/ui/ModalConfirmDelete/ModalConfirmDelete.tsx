@@ -9,7 +9,9 @@ export const ModalConfirmDelete = ({ onClose }: IModalConfirmDelete) => {
         <Button type="button" bg="ghost" onClick={onClose}>
           Close
         </Button>
-        <Button type="button">Delete</Button>
+        <Button type="button" className="bg-[#EF4444]">
+          Delete
+        </Button>
       </ButtonGroup>
     </div>
   );

@@ -1,4 +1,4 @@
-import { getToken } from "@/utilities";
+import { getToken } from "@/utils";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

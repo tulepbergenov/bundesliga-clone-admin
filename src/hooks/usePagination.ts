@@ -1,4 +1,4 @@
-import { paginate } from "@/utilities";
+import { paginate } from "@/utils";
 import { useCallback, useMemo, useState } from "react";
 
 export const usePagination = (data: any[] = []) => {
