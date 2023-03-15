@@ -7,6 +7,7 @@ import {
   Articles,
   Club,
   Clubs,
+  EditArticle,
   EditClub,
   Footballers,
   Home,
@@ -85,6 +86,24 @@ export const rootRouter = createBrowserRouter([
       {
         path: "/news/:articleId",
         element: <Article />,
+        loader: async ({ params }: { params: any }) => {
+          const articleDetailQuery = (id: number) => ({
+            queryKey: ["articles", id],
+            queryFn: async () => articleService.getArticle(id),
+          });
+
+          const query = articleDetailQuery(params.articleId);
+
+          return (
+            queryClient.getQueryData(query.queryKey) ??
+            (await queryClient.fetchQuery(query))
+          );
+        },
+        errorElement: <PageNotFound />,
+      },
+      {
+        path: "/news/:articleId/edit",
+        element: <EditArticle />,
         loader: async ({ params }: { params: any }) => {
           const articleDetailQuery = (id: number) => ({
             queryKey: ["articles", id],

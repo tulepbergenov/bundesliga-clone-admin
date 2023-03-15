@@ -1,4 +1,4 @@
-import { useAddArticle } from "@/api/hooks";
+import { useEditArticle } from "@/api/hooks";
 import { Spinner } from "@/components";
 import {
   Button,
@@ -15,12 +15,21 @@ import { IFormArticle } from "@/interfaces";
 import { articleFormSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const schema = articleFormSchema;
 
-export const AddArticle = () => {
-  const { mutate, isLoading } = useAddArticle();
+interface IArticle {
+  id: number;
+  title: string;
+  short_description: string;
+  long_description: string;
+}
+
+export const EditArticle = () => {
+  const data: any = useLoaderData();
+  const article: IArticle = data.data.data;
+  const { mutate, isLoading } = useEditArticle(article.id);
   const navigate = useNavigate();
 
   const {
@@ -41,27 +50,40 @@ export const AddArticle = () => {
 
   return (
     <>
-      <Heading className="mb-[12px]">Add News</Heading>
+      <Heading subHeading={article.title} className="mb-[12px]">
+        Add News
+      </Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormBody className="mb-[24px]">
           <FormGroup>
             <Label required>Title</Label>
             <div className="w-full">
-              <Input type="text" {...register("title")} />
+              <Input
+                type="text"
+                defaultValue={article.title}
+                {...register("title")}
+              />
               <ErrorMessage error={errors.title} />
             </div>
           </FormGroup>
           <FormGroup>
             <Label required>Description</Label>
             <div className="w-full">
-              <Input type="text" {...register("short_description")} />
+              <Input
+                type="text"
+                defaultValue={article.short_description}
+                {...register("short_description")}
+              />
               <ErrorMessage error={errors.short_description} />
             </div>
           </FormGroup>
           <FormGroup>
             <Label required>Body</Label>
             <div className="w-full">
-              <Textarea {...register("long_description")} />
+              <Textarea
+                defaultValue={article.long_description}
+                {...register("long_description")}
+              />
               <ErrorMessage error={errors.long_description} />
             </div>
           </FormGroup>
@@ -71,7 +93,7 @@ export const AddArticle = () => {
             Cancel
           </Link>
           <Button type="submit">
-            {isLoading ? <Spinner className="h-5 w-5 text-white" /> : "Add"}
+            {isLoading ? <Spinner className="h-5 w-5 text-white" /> : "Save"}
           </Button>
         </div>
       </form>
