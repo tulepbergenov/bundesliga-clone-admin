@@ -7,6 +7,7 @@ export * from "./Club";
 export * from "./Clubs";
 export * from "./EditArticle";
 export * from "./EditClub";
+export * from "./Footballer";
 export * from "./Footballers";
 export * from "./Home";
 export * from "./Login";

@@ -1,7 +1,13 @@
+import { IFootballerResponse, IFootballersResponse } from "@/interfaces";
+import { AxiosResponse } from "axios";
 import { api } from "../axios";
 
-const getFootballers = () => api.get("/footballers");
+const getFootballers = (): Promise<AxiosResponse<IFootballersResponse, any>> =>
+  api.get("/footballers");
 
-const getFootballer = (id: number) => api.get(`/footballers/${id}`);
+const getFootballer = (
+  id: number
+): Promise<AxiosResponse<IFootballerResponse, any>> =>
+  api.get(`/footballers/${id}`);
 
 export const footballerService = { getFootballers, getFootballer };

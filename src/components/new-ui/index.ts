@@ -1,4 +1,5 @@
 export * from "./Button";
+export * from "./ContentSpinner";
 export * from "./ErrorMessage";
 export * from "./FormBody";
 export * from "./FormGroup";
@@ -6,4 +7,7 @@ export * from "./Heading";
 export * from "./Input";
 export * from "./Label";
 export * from "./Link";
+export * from "./SearchInput";
+export * from "./TableController";
 export * from "./Textarea";
+export * from "./Tooltip";

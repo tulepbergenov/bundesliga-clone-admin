@@ -1,4 +1,4 @@
-import { articleService, clubService } from "@/api/services";
+import { articleService, clubService, footballerService } from "@/api/services";
 import { AppLayout } from "@/layouts";
 import {
   AddArticle,
@@ -9,6 +9,7 @@ import {
   Clubs,
   EditArticle,
   EditClub,
+  Footballer,
   Footballers,
   Home,
   Login,
@@ -76,6 +77,24 @@ export const rootRouter = createBrowserRouter([
         element: <Footballers />,
       },
       {
+        path: "/footballers/:footballerId",
+        element: <Footballer />,
+        loader: async ({ params }: { params: any }) => {
+          const contactDetailQuery = (id: number) => ({
+            queryKey: ["footballers", id],
+            queryFn: async () => footballerService.getFootballer(id),
+          });
+
+          const query = contactDetailQuery(params.footballerId);
+
+          return (
+            queryClient.getQueryData(query.queryKey) ??
+            (await queryClient.fetchQuery(query))
+          );
+        },
+        errorElement: <PageNotFound />,
+      },
+      {
         path: "/news",
         element: <Articles />,
       },
@@ -118,10 +137,6 @@ export const rootRouter = createBrowserRouter([
           );
         },
         errorElement: <PageNotFound />,
-      },
-      {
-        path: "/404",
-        element: <PageNotFound />,
       },
       {
         path: "/*",
