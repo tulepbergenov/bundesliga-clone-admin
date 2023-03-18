@@ -1,2 +1,2 @@
-export * from "./paginate.utility";
-export * from "./token.utility";
+export * from "./paginate.util";
+export * from "./token.util";

@@ -1,9 +1,7 @@
-import { ITable } from "./Table.interface";
+import { PropsWithChildren } from "react";
 
-export const Table = ({ children }: ITable) => {
+export const Table = ({ children }: PropsWithChildren) => {
   return (
-    <table className="w-full table-auto border-collapse border border-[#F1F5F9]">
-      {children}
-    </table>
+    <table className="w-full table-auto border-collapse">{children}</table>
   );
 };

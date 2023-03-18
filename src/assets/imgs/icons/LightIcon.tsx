@@ -1,6 +1,7 @@
 import { IIcon } from "@/interfaces";
+import { memo } from "react";
 
-export const LightIcon = ({ className, ...props }: IIcon) => {
+export const LightIcon = memo(({ className, ...props }: IIcon) => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -15,4 +16,6 @@ export const LightIcon = ({ className, ...props }: IIcon) => {
       ></path>
     </svg>
   );
-};
+});
+
+LightIcon.displayName = "LightIcon";

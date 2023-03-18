@@ -1,20 +1,20 @@
 import classNames from "classnames";
 import { IErrorMessage } from "./ErrorMessage.interface";
 
-export const ErrorMessage = ({
-  children,
-  className,
-  ...props
-}: IErrorMessage) => {
-  return (
-    <p
-      className={classNames(
-        "mt-[3px] pl-[5px] text-xs text-red-500",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </p>
-  );
+export const ErrorMessage = ({ error, className, ...props }: IErrorMessage) => {
+  if (error) {
+    return (
+      <p
+        className={classNames(
+          "text-[12px] font-normal leading-[16px] text-[#DC2626]",
+          className
+        )}
+        {...props}
+      >
+        {error.message}
+      </p>
+    );
+  }
+
+  return null;
 };

@@ -1,6 +1,5 @@
-import { PropsWithChildren } from "react";
 import { LinkProps } from "react-router-dom";
 
-export interface ILink extends LinkProps, PropsWithChildren {
+export interface ILink extends LinkProps {
   apperience?: "button" | "link";
 }

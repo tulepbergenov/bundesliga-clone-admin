@@ -11,9 +11,6 @@ module.exports = {
       fontFamily: {
         nunito: "Nunito, sans-serif",
       },
-      backgroundImage: {
-        404: "url('./src/assets/imgs/404.png')",
-      },
     },
   },
   plugins: [],

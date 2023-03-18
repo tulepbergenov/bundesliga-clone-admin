@@ -1,110 +1,101 @@
-import { useGetAuthUser, useLogout } from "@/api/hooks";
-import { ArrowDownIcon } from "@/assets/imgs/icons";
+import { useGetUser } from "@/api/hooks";
+import { useLogout } from "@/api/hooks/useLogout";
+import { ArrowDownIcon, ExitIcon } from "@/assets/imgs/icons";
 import { Menu, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { IUser } from "./User.interface";
 
-const mockAvatarImg =
-  "https://images.unsplash.com/photo-1611915387288-fd8d2f5f928b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80";
+const userImg =
+  "https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png";
 
-export const User = () => {
-  const { data: user, isLoading } = useGetAuthUser();
+export const User = ({ className }: IUser) => {
+  const { data, isLoading } = useGetUser();
   const { refetch } = useLogout();
 
-  const handleLogout = (e: any) => {
-    e.preventDefault();
+  const handleLogout = () => {
     refetch();
   };
 
   return (
-    <>
-      <Menu as="div" className="relative ml-[28px]">
-        {({ open }) => (
-          <>
-            <Menu.Button
-              as="button"
-              type="button"
-              className="grid grid-cols-[32px_1fr_20px] items-center"
-            >
-              {isLoading ? (
-                <div className="h-[32px] w-[32px] rounded-full bg-[#F1F5F9]"></div>
-              ) : (
-                <div className="h-[32px] w-full overflow-hidden rounded-full">
+    <Menu
+      as="div"
+      className={classNames(
+        "relative text-[14px] font-semibold leading-[19px] text-[#64748B] dark:text-[#94A3B8]",
+        className
+      )}
+    >
+      {({ open }) => (
+        <>
+          <Menu.Button
+            as="button"
+            type="button"
+            className="flex items-center gap-x-[12px]"
+          >
+            {isLoading && (
+              <>
+                <div className="h-[32px] w-[32px] animate-pulse rounded-full bg-[#64748B] dark:bg-[#94A3B8]"></div>
+                <div className="h-[14px] w-[100px] animate-pulse rounded bg-[#64748B] dark:bg-[#94A3B8]"></div>
+              </>
+            )}
+            {data && (
+              <>
+                <div className="h-[32px] w-[32px] overflow-hidden rounded-full">
                   <img
-                    src={mockAvatarImg}
-                    alt="Cat"
-                    className="h-full w-full object-cover"
+                    src={userImg}
+                    width={32}
+                    height={32}
+                    alt={data.data.data.name}
                   />
                 </div>
+                <span>{data.data.data.name}</span>
+              </>
+            )}
+            <ArrowDownIcon
+              className={classNames(
+                "h-auto w-[18px] transition-transform duration-300 ease-in-out",
+                {
+                  ["rotate-180"]: open,
+                }
               )}
-              {isLoading ? (
-                <div className="mr-[8px] ml-[12px] flex animate-pulse">
-                  <div className="h-[14px] w-10 rounded-full bg-[#F1F5F9]"></div>
-                </div>
-              ) : (
-                <span className="mr-[8px] ml-[12px] text-[14px] font-semibold leading-[19px] text-[#475569] dark:text-[#94A3B8]">
-                  {user?.data.data.name}
-                </span>
-              )}
-              <ArrowDownIcon
-                className={classNames(
-                  "h-auto w-full transition-transform duration-300 ease-in-out",
-                  {
-                    ["rotate-180"]: open,
-                  }
-                )}
-              />
-            </Menu.Button>
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
+            />
+          </Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items
+              as="ul"
+              className="absolute z-10 w-full translate-y-[10px] overflow-hidden rounded-[4px] border border-[#CBD5E1] bg-white shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:border-[#334155] dark:bg-[#1E293B]"
             >
-              <Menu.Items
-                as="ul"
-                className="absolute z-10 w-full translate-y-[10px] overflow-hidden rounded-[5px] bg-white shadow"
-              >
-                <Menu.Item as="li">
-                  {({ active }) => (
-                    <Link
-                      to="#settings"
-                      className={classNames(
-                        "inline-block w-full py-[10px] px-[10px] font-semibold transition-colors duration-300 ease-in-out",
-                        {
-                          ["bg-[#0EA5E9] text-white"]: active,
-                        }
-                      )}
-                    >
-                      Settings
-                    </Link>
-                  )}
-                </Menu.Item>
-                <Menu.Item as="li">
-                  {({ active }) => (
-                    <Link
-                      to="/login"
-                      onClick={handleLogout}
-                      className={classNames(
-                        "inline-block w-full py-[10px] px-[10px] font-semibold transition-colors duration-300 ease-in-out",
-                        {
-                          ["bg-[#0EA5E9] text-white"]: active,
-                        }
-                      )}
-                    >
+              <Menu.Item as="li">
+                {({ active }) => (
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className={classNames(
+                      "grid w-full grid-cols-[24px_1fr] items-center gap-x-[10px] px-[10px] py-[10px] text-start hover:text-[#0EA5E9]",
+                      {
+                        ["text-[#0EA5E9]"]: active,
+                      }
+                    )}
+                  >
+                    <ExitIcon className="h-auto w-full transition-colors duration-300 ease-in-out" />
+                    <span className="transition-colors duration-300 ease-in-out">
                       Exit
-                    </Link>
-                  )}
-                </Menu.Item>
-              </Menu.Items>
-            </Transition>
-          </>
-        )}
-      </Menu>
-    </>
+                    </span>
+                  </button>
+                )}
+              </Menu.Item>
+            </Menu.Items>
+          </Transition>
+        </>
+      )}
+    </Menu>
   );
 };

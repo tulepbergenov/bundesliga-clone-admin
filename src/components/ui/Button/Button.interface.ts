@@ -5,17 +5,10 @@ import {
 } from "react";
 
 export interface IButton
-  extends DetailedHTMLProps<
+  extends PropsWithChildren,
+    DetailedHTMLProps<
       ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
-    >,
-    PropsWithChildren {
-  bg?: "blue" | "ghost";
+    > {
+  isLoading?: boolean;
 }
-
-export interface IPaginationButton
-  extends DetailedHTMLProps<
-      ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement
-    >,
-    PropsWithChildren {}

@@ -1,7 +1,11 @@
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from "react";
+import {
+  DetailedHTMLProps,
+  LabelHTMLAttributes,
+  PropsWithChildren,
+} from "react";
 
-export interface ILable
+export interface ILabel
   extends PropsWithChildren,
-    DetailedHTMLProps<HTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
+    DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
   required?: boolean;
 }

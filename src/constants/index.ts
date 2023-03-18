@@ -1,2 +1,2 @@
-export * from "./sidebar-nav-links.constant";
+export * from "./nav-links";
 export * from "./theme.constant";

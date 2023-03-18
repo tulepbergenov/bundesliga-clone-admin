@@ -1,6 +1,7 @@
 import { IIcon } from "@/interfaces";
+import { memo } from "react";
 
-export const DarkIcon = ({ className, ...props }: IIcon) => {
+export const DarkIcon = memo(({ className, ...props }: IIcon) => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -15,4 +16,6 @@ export const DarkIcon = ({ className, ...props }: IIcon) => {
       ></path>
     </svg>
   );
-};
+});
+
+DarkIcon.displayName = "DarkIcon";

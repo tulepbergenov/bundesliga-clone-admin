@@ -1,27 +1,28 @@
-import { ILoginFormData } from "@/interfaces";
-import { removeToken, setToken } from "@/utils";
+import { ILogin } from "@/interfaces";
+import { setToken } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AuthService } from "../services";
+import { authService } from "../services";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (submitData: ILoginFormData) =>
-      AuthService.loginUser(submitData),
+    mutationFn: (data: ILogin) => authService.login(data),
     onSuccess: (data) => {
       setToken(data.data.token);
-      navigate("/");
+      navigate("/home");
       queryClient.invalidateQueries({
-        queryKey: ["auth-user"],
+        queryKey: ["user"],
       });
     },
-    onError: (err: any) => {
-      removeToken();
-      toast.error(err.response.data.message);
+    onError: (e: Error | AxiosError) => {
+      if (axios.isAxiosError(e)) {
+        toast.error(e.response?.data.message);
+      }
     },
   });
 };

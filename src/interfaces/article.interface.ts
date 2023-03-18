@@ -1,4 +1,4 @@
-export interface IArticles {
+export interface IArticlesResponse {
   data: IArticle[];
 }
 
@@ -7,9 +7,5 @@ export interface IArticle {
   title: string;
   short_description: string;
   long_description: string;
-  image: string;
-}
-
-export interface IArticleResponse {
-  data: IArticle;
+  image?: string;
 }

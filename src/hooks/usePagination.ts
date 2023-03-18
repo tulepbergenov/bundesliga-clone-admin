@@ -1,59 +1,63 @@
 import { paginate } from "@/utils";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-export const usePagination = (data: any[] = []) => {
-  const [pageSize] = useState(5);
+const pageSize = 5;
+
+export const usePagination = (items: any[]) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const dataCrop: any[] = paginate(data, currentPage, pageSize);
+  const itemCount = useMemo(() => items.length, [items]);
 
-  const handlePrevPage = useCallback(() => {
-    setCurrentPage((prevPage) => prevPage - 1);
-  }, []);
-
-  const handleNextPage = useCallback(() => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  }, []);
-
-  const pageCount = useMemo(() => data.length, [data]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [items]);
 
   const totalPages = useMemo(
-    () => Math.ceil(pageCount / pageSize),
-    [pageCount]
+    () => Math.ceil(itemCount / pageSize),
+    [itemCount]
   );
 
-  const startIndex = useMemo(
-    () => (currentPage - 1) * pageSize + 1,
-    [currentPage, pageSize]
-  );
+  const startIndex = useMemo(() => (currentPage - 1) * pageSize, [currentPage]);
 
   const endIndex = useMemo(
-    () => Math.min(startIndex + pageSize - 1, data.length - 1),
-    [pageSize, startIndex, data]
+    () => Math.min(startIndex + pageSize - 1, itemCount - 1),
+    [startIndex, itemCount]
   );
+
+  const itemCrop = useMemo(
+    () => paginate(items, currentPage, pageSize),
+    [items, currentPage]
+  );
+
+  const onPrevPage = useCallback(() => {
+    setCurrentPage((prevCurrPage) => prevCurrPage - 1);
+  }, []);
+
+  const onNextPage = useCallback(() => {
+    setCurrentPage((prevCurrPage) => prevCurrPage + 1);
+  }, []);
 
   const value = useMemo(() => {
     return {
       currentPage,
+      itemCrop,
+      itemCount,
       totalPages,
-      handleNextPage,
-      handlePrevPage,
-      dataCrop,
-      pageCount,
-      setCurrentPage,
-      pageSize,
-      startIndex,
       endIndex,
+      startIndex,
+      onPrevPage,
+      onNextPage,
+      setCurrentPage,
     };
   }, [
-    data,
     currentPage,
-    dataCrop,
-    pageCount,
+    itemCrop,
+    itemCount,
+    onPrevPage,
+    onNextPage,
     totalPages,
-    pageSize,
-    startIndex,
     endIndex,
+    startIndex,
   ]);
 
   return value;

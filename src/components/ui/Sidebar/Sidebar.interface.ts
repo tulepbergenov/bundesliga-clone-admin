@@ -1,6 +1,4 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-export type ISidebar = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
+export interface ISidebar
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}

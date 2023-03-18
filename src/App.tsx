@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
-import { Toast } from "./components/ui";
+import { Toast } from "./components";
 import { useTheme } from "./hooks";
-import { rootRouter } from "./routes";
+import { router } from "./routes";
 import { applyThemePreference } from "./store";
 
 export const App = () => {
@@ -14,7 +14,7 @@ export const App = () => {
 
   return (
     <>
-      <RouterProvider router={rootRouter} />
+      <RouterProvider router={router} />
       <Toast />
     </>
   );

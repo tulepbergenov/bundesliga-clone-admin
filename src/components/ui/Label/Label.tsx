@@ -1,13 +1,13 @@
 import classNames from "classnames";
-import { ILable } from "./Label.interface";
+import { ILabel } from "./Label.interface";
 
-export const Label = ({ children, className, required, ...props }: ILable) => {
+export const Label = ({ children, required, className, ...props }: ILabel) => {
   return (
     <label
       className={classNames(
-        "mt-[8px] text-[14px] font-normal leading-[19px] text-[#64748B]",
+        "text-[14px] font-normal leading-[19px] text-[#64748B] dark:text-[#94A3B8]",
         {
-          "after:ml-[3px] after:text-[#EF4444] after:content-['*']": required,
+          ["after:ml-[3px] after:text-[#EF4444] after:content-['']"]: required,
         },
         className
       )}

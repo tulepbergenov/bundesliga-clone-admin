@@ -1,81 +1,78 @@
 import { useGetArticles, useGetClubs, useGetFootballers } from "@/api/hooks";
 import { FootballIcon, NewsIcon, UsersIcon } from "@/assets/imgs/icons";
-import { Spinner } from "@/components";
+import { Heading, Spinner } from "@/components";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
-  const { data: clubs } = useGetClubs();
-  const { data: articles } = useGetArticles();
-  const { data: footballers } = useGetFootballers();
+  const { data: clubData, isLoading: isLoadingClubs } = useGetClubs();
+  const { data: footballerData, isLoading: isLoadingFootballers } =
+    useGetFootballers();
+  const { data: articleData, isLoading: isLoadingArticles } = useGetArticles();
 
   return (
-    <section>
-      <h1 className="sr-only">Bundesliga Admin</h1>
-      <ul className="grid auto-rows-[minmax(auto,_160px)] grid-cols-3 gap-[24px]">
-        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
-          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B] dark:text-[#94A3B8]">
-            Current Clubs
-          </p>
-          <div className="flex items-center gap-x-[16px]">
-            <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-[#22C55E] text-white">
-              <FootballIcon className="h-auto w-[24px]" />
-            </div>
-            <div className="text-[36px] leading-[48px] text-[#64748B] dark:text-[#94A3B8]">
-              {clubs ? (
-                clubs.data.data.length
-              ) : (
-                <Spinner className="h-[20px] w-[20px] text-[#64748B]" />
-              )}
-            </div>
-          </div>
+    <>
+      <Heading className="mb-[12px]">Home</Heading>
+      <ul className="grid grid-cols-3 gap-[24px]">
+        <li>
           <Link
             to="/clubs"
-            className="absolute top-0 left-0 z-[5] h-full w-full"
-          ></Link>
+            className="inline-block w-full rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] text-[#64748B] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B] dark:text-[#94A3B8]"
+          >
+            <h2 className="mb-[18px] text-[14px] font-extrabold capitalize leading-[19px]">
+              Current Clubs
+            </h2>
+            <div className="flex items-center gap-x-[16px]">
+              <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-[#0EA5E9] text-white">
+                <FootballIcon className="h-auto w-[24px]" />
+              </div>
+              <p className="text-[36px] leading-[48px]">
+                {isLoadingClubs && <Spinner className="h-auto w-[36px]" />}
+                {clubData && clubData.data.data.length}
+              </p>
+            </div>
+          </Link>
         </li>
-        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
-          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B] dark:text-[#94A3B8]">
-            Current Footballers
-          </p>
-          <div className="flex items-center gap-x-[16px]">
-            <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-[#0EA5E9] text-white">
-              <UsersIcon className="h-auto w-[24px]" />
-            </div>
-            <div className="text-[36px] leading-[48px] text-[#64748B] dark:text-[#94A3B8]">
-              {footballers ? (
-                footballers.data.data.length
-              ) : (
-                <Spinner className="h-[20px] w-[20px] text-[#64748B]" />
-              )}
-            </div>
-          </div>
+        <li>
           <Link
             to="/footballers"
-            className="absolute top-0 left-0 z-[5] h-full w-full"
-          ></Link>
+            className="inline-block w-full rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] text-[#64748B] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B] dark:text-[#94A3B8]"
+          >
+            <h2 className="mb-[18px] text-[14px] font-extrabold capitalize leading-[19px]">
+              Current Footballers
+            </h2>
+            <div className="flex items-center gap-x-[16px]">
+              <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-[#22C55E] text-white">
+                <UsersIcon className="h-auto w-[24px]" />
+              </div>
+              <p className="text-[36px] leading-[48px]">
+                {isLoadingFootballers && (
+                  <Spinner className="h-auto w-[36px]" />
+                )}
+                {footballerData && footballerData.data.data.length}
+              </p>
+            </div>
+          </Link>
         </li>
-        <li className="relative rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B]">
-          <p className="mb-[18px] text-[14px] font-extrabold leading-[19px] text-[#64748B] dark:text-[#94A3B8]">
-            Current News
-          </p>
-          <div className="flex items-center gap-x-[16px]">
-            <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-orange-400 text-white">
-              <NewsIcon className="h-auto w-[24px]" />
-            </div>
-            <div className="text-[36px] leading-[48px] text-[#64748B] dark:text-[#94A3B8]">
-              {articles ? (
-                articles.data.data.length
-              ) : (
-                <Spinner className="h-[20px] w-[20px] text-[#64748B]" />
-              )}
-            </div>
-          </div>
+        <li>
           <Link
             to="/news"
-            className="absolute top-0 left-0 z-[5] h-full w-full"
-          ></Link>
+            className="inline-block w-full rounded-[8px] bg-white px-[24px] pt-[16px] pb-[28px] text-[#64748B] transition-shadow duration-300 ease-in-out hover:shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] dark:bg-[#1E293B] dark:text-[#94A3B8]"
+          >
+            <h2 className="mb-[18px] text-[14px] font-extrabold capitalize leading-[19px]">
+              Current News
+            </h2>
+            <div className="flex items-center gap-x-[16px]">
+              <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[8px] bg-orange-400 text-white">
+                <NewsIcon className="h-auto w-[24px]" />
+              </div>
+              <p className="text-[36px] leading-[48px]">
+                {isLoadingArticles && <Spinner className="h-auto w-[36px]" />}
+                {articleData && articleData.data.data.length}
+              </p>
+            </div>
+          </Link>
         </li>
       </ul>
-    </section>
+    </>
   );
 };

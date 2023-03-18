@@ -1,5 +1,3 @@
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
-export interface ITableWrapper
-  extends PropsWithChildren,
-    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+export interface ITableWrapper extends PropsWithChildren {}

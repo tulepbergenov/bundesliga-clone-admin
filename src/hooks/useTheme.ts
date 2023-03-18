@@ -10,7 +10,7 @@ export const useTheme = () => {
       theme,
       toggleTheme,
     };
-  }, [theme]);
+  }, [theme, toggleTheme]);
 
   return value;
 };

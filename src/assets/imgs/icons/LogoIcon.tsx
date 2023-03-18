@@ -1,7 +1,7 @@
 import { IIcon } from "@/interfaces";
 import { memo } from "react";
 
-const LogoIcon = ({ className, ...props }: IIcon) => {
+export const LogoIcon = memo(({ className, ...props }: IIcon) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +31,6 @@ const LogoIcon = ({ className, ...props }: IIcon) => {
       </defs>
     </svg>
   );
-};
+});
 
-export default memo(LogoIcon);
+LogoIcon.displayName = "LogoIcon";

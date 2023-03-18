@@ -16,7 +16,7 @@ export const withAuth = <T extends Record<string, unknown>>(Component: FC) => {
       }
 
       setAuth(true);
-    }, []);
+    }, [router]);
 
     if (!auth) {
       return null;

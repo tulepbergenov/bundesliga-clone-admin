@@ -1,1 +1,2 @@
-export { api } from "./axios";
+export * from "./axios";
+export * from "./services";

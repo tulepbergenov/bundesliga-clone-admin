@@ -1,30 +1,33 @@
-import { SIDEBAR_NAV_LINKS } from "@/constants";
+import { NAV_LINKS } from "@/constants";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 import { ISidebar } from "./Sidebar.interface";
 
 export const Sidebar = ({ className, ...props }: ISidebar) => {
   return (
-    <aside className={className} {...props}>
+    <aside className={classNames(className)} {...props}>
       <nav>
         <ul className="flex flex-col gap-y-[2px]">
-          {SIDEBAR_NAV_LINKS.map((link, i) => (
+          {NAV_LINKS.map((link, i) => (
             <li key={i}>
               <NavLink
                 to={link.path}
                 className={({ isActive }) =>
                   classNames(
-                    "grid grid-cols-[24px_1fr] items-center gap-x-[8px] rounded-[5px] px-[15px] py-[10px] text-[16px] font-semibold leading-[21px] text-[#64748B]",
+                    "group grid grid-cols-[24px_1fr] items-center gap-x-[10px] rounded-[4px] py-[10px] px-[10px]",
                     {
                       ["bg-[#0EA5E9] text-white dark:text-[#0F172A]"]: isActive,
-                      ["transition-colors duration-300 ease-in-out hover:text-[#0EA5E9] dark:text-[#94A3B8]"]:
-                        !isActive,
+                    },
+                    {
+                      ["hover:text-[#0EA5E9]"]: !isActive,
                     }
                   )
                 }
               >
                 {link.icon}
-                <p>{link.name}</p>
+                <span className="text-[16px] font-semibold leading-[21px] transition-colors duration-300 ease-in-out">
+                  {link.name}
+                </span>
               </NavLink>
             </li>
           ))}

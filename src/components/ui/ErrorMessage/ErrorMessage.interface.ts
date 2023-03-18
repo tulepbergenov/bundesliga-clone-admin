@@ -1,8 +1,13 @@
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export interface IErrorMessage
-  extends PropsWithChildren,
-    DetailedHTMLProps<
-      HTMLAttributes<HTMLParagraphElement>,
-      HTMLParagraphElement
-    > {}
+  extends DetailedHTMLProps<
+    HTMLAttributes<HTMLParagraphElement>,
+    HTMLParagraphElement
+  > {
+  error: IError | any;
+}
+
+interface IError {
+  message: string;
+}

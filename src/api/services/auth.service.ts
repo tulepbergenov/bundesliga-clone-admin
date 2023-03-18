@@ -1,29 +1,17 @@
-import { ILoginFormData, ILoginResponse } from "@/interfaces";
+import { ILogin, ILoginResponse, ILogout, IUserResponse } from "@/interfaces";
 import { AxiosResponse } from "axios";
 import { api } from "../axios";
 
-const loginUser = (
-  data: ILoginFormData
-): Promise<AxiosResponse<ILoginResponse, any>> => {
-  const res = api.post("/auth/login", data);
+const login = (data: ILogin): Promise<AxiosResponse<ILoginResponse>> =>
+  api.post("/auth/login", data);
 
-  return res;
-};
+const logout = (): Promise<AxiosResponse<ILogout>> => api.post("/auth/logout");
 
-const logoutUser = (): Promise<AxiosResponse<any, any>> => {
-  const res = api.post("/auth/logout");
+const getUser = (): Promise<AxiosResponse<IUserResponse>> =>
+  api.get("/auth/user");
 
-  return res;
-};
-
-const getUser = (): Promise<AxiosResponse<ILoginResponse, any>> => {
-  const res = api.get("/auth/user");
-
-  return res;
-};
-
-export const AuthService = {
-  loginUser,
-  logoutUser,
+export const authService = {
+  login,
+  logout,
   getUser,
 };
