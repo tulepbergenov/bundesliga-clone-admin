@@ -1,5 +1,5 @@
 import { useGetClubs } from "@/api/hooks";
-import { BinIcon, EditIcon, EyeIcon } from "@/assets/imgs/icons";
+import { EditIcon, EyeIcon } from "@/assets/imgs/icons";
 import {
   Heading,
   Link,
@@ -90,14 +90,6 @@ export const Clubs = () => {
                         >
                           <EditIcon className="h-auto w-full" />
                         </Link>
-                      </Tooltip>
-                      <Tooltip label="Remove">
-                        <button
-                          type="button"
-                          className="inline-block h-[24px] w-[24px] transition-colors duration-300 ease-in-out hover:text-[#EF4444]"
-                        >
-                          <BinIcon className="h-auto w-full" />
-                        </button>
                       </Tooltip>
                     </div>
                   </Td>

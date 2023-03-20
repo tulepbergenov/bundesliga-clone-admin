@@ -1,0 +1,3 @@
+.inputField {
+  @apply flex flex-col gap-y-[3px];
+}

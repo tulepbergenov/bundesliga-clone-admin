@@ -24,6 +24,21 @@ export const Link = ({
     );
   }
 
+  if (apperience === "backLink") {
+    return (
+      <RouterLink
+        to={to}
+        className={classNames(
+          "text-[14px] font-extrabold leading-[19px] text-[#94A3B8] transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </RouterLink>
+    );
+  }
+
   if (apperience === "link") {
     return (
       <RouterLink to={to} className={classNames(className)} {...props}>

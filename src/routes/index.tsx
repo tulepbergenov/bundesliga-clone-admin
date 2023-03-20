@@ -1,5 +1,14 @@
 import { AppLayout } from "@/layouts";
-import { AddClub, Club, Clubs, Home, Login, PageNotFound } from "@/pages";
+import {
+  AddClub,
+  Club,
+  clubLoader,
+  Clubs,
+  Home,
+  Login,
+  PageNotFound,
+} from "@/pages";
+import { EditClub } from "@/pages/EditClub";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -21,10 +30,14 @@ export const router = createBrowserRouter([
       {
         path: "/clubs/:clubId",
         element: <Club />,
+        loader: clubLoader,
+        errorElement: <PageNotFound />,
       },
       {
         path: "/clubs/:clubId/edit",
-        element: <Club />,
+        element: <EditClub />,
+        loader: clubLoader,
+        errorElement: <PageNotFound />,
       },
       {
         path: "/*",

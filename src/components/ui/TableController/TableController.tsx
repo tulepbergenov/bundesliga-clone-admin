@@ -17,7 +17,7 @@ export const TableController = memo(
           type="button"
           disabled={currentPage === 1}
           onClick={onPrevPage}
-          className="transition-colors duration-300 ease-in-out disabled:text-[#CBD5E1] dark:disabled:text-[#475569]"
+          className="transition-colors duration-300 ease-in-out disabled:text-[#CBD5E1] dark:text-[#0EA5E9] dark:disabled:text-[#475569]"
         >
           Previous
         </button>
@@ -28,7 +28,7 @@ export const TableController = memo(
           type="button"
           disabled={totalPages === currentPage}
           onClick={onNextPage}
-          className="transition-colors duration-300 ease-in-out disabled:text-[#CBD5E1] dark:disabled:text-[#475569]"
+          className="transition-colors duration-300 ease-in-out disabled:text-[#CBD5E1] dark:text-[#0EA5E9] dark:disabled:text-[#475569]"
         >
           Next
         </button>

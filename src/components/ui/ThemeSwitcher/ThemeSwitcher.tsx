@@ -13,14 +13,14 @@ export const ThemeSwitcher = ({ className }: IThemeSwitcher) => {
       type="button"
       onClick={toggleTheme}
       className={classNames(
-        "inline-block text-[#64748B] dark:text-[#94A3B8]",
+        "inline-block text-[#64748B] hover:text-[#0EA5E9] dark:text-[#94A3B8] dark:hover:text-[#0EA5E9]",
         className
       )}
     >
       {theme === THEME_LIGHT ? (
-        <LightIcon className="h-auto w-[24px]" />
+        <LightIcon className="h-auto w-[24px] transition-colors duration-300 ease-in-out" />
       ) : (
-        <DarkIcon className="h-auto w-[24px]" />
+        <DarkIcon className="h-auto w-[24px] transition-colors duration-300 ease-in-out" />
       )}
     </button>
   );

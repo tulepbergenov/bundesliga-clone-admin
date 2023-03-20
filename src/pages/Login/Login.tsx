@@ -49,7 +49,7 @@ export const Login = () => {
         </fieldset>
       </fieldset>
       <Button type="submit" isLoading={isLoading}>
-        Create User
+        Login
       </Button>
     </form>
   );

@@ -12,3 +12,20 @@ export interface IClub {
   draw: string;
   lose: string;
 }
+
+export interface IClubResponse {
+  data: IClub;
+}
+
+export interface IClubFormData {
+  name: string;
+  stadium: string;
+  short_name: string;
+  color: string;
+}
+
+export interface IEditClubFormData extends IClubFormData {
+  win: number;
+  draw: number;
+  lose: number;
+}

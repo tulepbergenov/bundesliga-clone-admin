@@ -6,23 +6,17 @@ const pageSize = 5;
 export const usePagination = (items: any[]) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemCount = useMemo(() => items.length, [items]);
+  const itemCount = items.length;
 
   useEffect(() => {
     setCurrentPage(1);
   }, [items]);
 
-  const totalPages = useMemo(
-    () => Math.ceil(itemCount / pageSize),
-    [itemCount]
-  );
+  const totalPages = Math.ceil(itemCount / pageSize);
 
-  const startIndex = useMemo(() => (currentPage - 1) * pageSize, [currentPage]);
+  const startIndex = (currentPage - 1) * pageSize;
 
-  const endIndex = useMemo(
-    () => Math.min(startIndex + pageSize - 1, itemCount - 1),
-    [startIndex, itemCount]
-  );
+  const endIndex = Math.min(startIndex + pageSize - 1, itemCount - 1);
 
   const itemCrop = useMemo(
     () => paginate(items, currentPage, pageSize),

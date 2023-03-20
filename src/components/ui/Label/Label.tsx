@@ -5,9 +5,9 @@ export const Label = ({ children, required, className, ...props }: ILabel) => {
   return (
     <label
       className={classNames(
-        "text-[14px] font-normal leading-[19px] text-[#64748B] dark:text-[#94A3B8]",
+        "inline-block text-[14px] font-normal leading-[19px] text-[#64748B] dark:text-[#94A3B8]",
         {
-          ["after:ml-[3px] after:text-[#EF4444] after:content-['']"]: required,
+          ["after:ml-[3px] after:text-[#EF4444] after:content-['*']"]: required,
         },
         className
       )}

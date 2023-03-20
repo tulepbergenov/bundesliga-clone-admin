@@ -1,0 +1,3 @@
+.formGroup > label {
+  @apply translate-y-[8.5px];
+}
