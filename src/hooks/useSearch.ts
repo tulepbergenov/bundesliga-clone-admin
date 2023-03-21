@@ -1,39 +1,26 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { useDebounce } from "./useDebounce";
 
-export const useSearch = (data: any) => {
+export const useSearch = (items: any[] = [], searchKey?: string) => {
   const [searchValue, setSearchValue] = useState("");
-  const [items, setItems] = useState<any[]>([]);
 
-  const deb = useDebounce(searchValue, 500);
+  const debSearchValue = useDebounce(searchValue, 500);
 
-  useEffect(() => {
-    if (data) {
-      if (searchValue === "") {
-        setItems(data.data.data);
-      }
+  const foundItems = items.filter((item) => {
+    return debSearchValue.toLocaleLowerCase() === ""
+      ? item
+      : item[searchKey || "name"].toLocaleLowerCase().includes(debSearchValue);
+  });
+
+  const onSeachValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    if (e) {
+      setSearchValue(e.target.value);
     }
-  }, [searchValue, data]);
-
-  const handleSearchValue = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      if (e) {
-        const results = items.filter((item) => {
-          if (e.target.value === "") return items;
-
-          return item.name.toLowerCase().includes(deb.toLowerCase());
-        });
-
-        setSearchValue(e.target.value);
-        setItems(results);
-      }
-    },
-    [items, deb]
-  );
+  }, []);
 
   const value = useMemo(() => {
-    return { searchValue, handleSearchValue, items };
-  }, [searchValue, items, handleSearchValue]);
+    return { debSearchValue, onSeachValue, foundItems };
+  }, [debSearchValue, foundItems, onSeachValue]);
 
   return value;
 };

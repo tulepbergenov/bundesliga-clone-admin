@@ -1,6 +1,7 @@
-import { useGetClubs } from "@/api/hooks";
-import { EditIcon, EyeIcon } from "@/assets/imgs/icons";
+import { useGetArticles } from "@/api/hooks";
+import { BinIcon, EditIcon, EyeIcon } from "@/assets/imgs/icons";
 import {
+  AlertConfirmDelete,
   Heading,
   Link,
   PageSpinner,
@@ -15,73 +16,63 @@ import {
   Tooltip,
   Tr,
 } from "@/components";
-import { usePagination, useSearch } from "@/hooks";
+import { useAlertModal, usePagination, useSearch } from "@/hooks";
 
-export const Clubs = () => {
-  const { data, isLoading } = useGetClubs();
+export const Articles = () => {
+  const { data, isLoading } = useGetArticles();
 
-  const {
-    debSearchValue,
-    onSeachValue,
-    foundItems: clubs,
-  } = useSearch(data?.data.data);
+  const { debSearchValue, onSeachValue, foundItems } = useSearch(
+    data?.data.data,
+    "title"
+  );
 
   const {
     itemCount,
-    itemCrop: clubCrop,
+    itemCrop: articleCrop,
     onNextPage,
     onPrevPage,
     totalPages,
     currentPage,
     startIndex,
     endIndex,
-  } = usePagination(clubs, debSearchValue);
+  } = usePagination(foundItems, debSearchValue);
+
+  const { isOpen, onCloseAlert, onOpenAlert, selectedItemId } = useAlertModal();
 
   return (
     <>
-      <Heading className="mb-[12px]">Clubs</Heading>
+      <Heading className="mb-[12px]">News</Heading>
       <div className="mb-[24px] flex items-center justify-between">
         <Search onChange={onSeachValue} />
-        <Link to="/clubs/add" apperience="button">
-          Add Club
+        <Link to="/news/add" apperience="button">
+          Add News
         </Link>
       </div>
       <PageSpinner isLoading={isLoading} />
-      {clubCrop.length > 0 && (
+      {articleCrop.length > 0 && (
         <TableWrapper>
           <Table>
             <Thead>
               <Tr>
                 <Th>ID</Th>
-                <Th>Name</Th>
-                <Th>Stadium</Th>
-                <Th>Color</Th>
-                <Th>Win</Th>
-                <Th>Draw</Th>
-                <Th>Lose</Th>
+                <Th>Title</Th>
+                <Th>Description</Th>
                 <Th></Th>
               </Tr>
             </Thead>
             <Tbody>
-              {clubCrop.map((club) => (
-                <Tr key={club.id}>
-                  <Td className="font-extrabold text-[#0EA5E9]">{club.id}</Td>
-                  <Td>{club.name}</Td>
-                  <Td>{club.stadium}</Td>
-                  <Td>
-                    <div
-                      style={{ backgroundColor: club.color }}
-                      className="inline-block h-[16px] w-[16px] rounded-full align-sub"
-                    ></div>
+              {articleCrop.map((article) => (
+                <Tr key={article.id}>
+                  <Td className="font-extrabold text-[#0EA5E9]">
+                    {article.id}
                   </Td>
-                  <Td>{club.win}</Td>
-                  <Td>{club.draw}</Td>
-                  <Td>{club.lose}</Td>
+                  <Td>{article.title}</Td>
+                  <Td>{article.short_description}</Td>
                   <Td>
                     <div className="flex items-center justify-center gap-x-[16px] text-[#94A3B8]">
                       <Tooltip label="View">
                         <Link
-                          to={`/clubs/${club.id}`}
+                          to={`/news/${article.id}`}
                           className="inline-block h-[24px] w-[24px] transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
                         >
                           <EyeIcon className="h-auto w-full" />
@@ -89,11 +80,20 @@ export const Clubs = () => {
                       </Tooltip>
                       <Tooltip label="Edit">
                         <Link
-                          to={`/clubs/${club.id}/edit`}
+                          to={`/news/${article.id}/edit`}
                           className="inline-block h-[24px] w-[24px] transition-colors duration-300 ease-in-out hover:text-[#22C55E]"
                         >
                           <EditIcon className="h-auto w-full" />
                         </Link>
+                      </Tooltip>
+                      <Tooltip label="Delete">
+                        <button
+                          type="button"
+                          onClick={() => onOpenAlert(article.id)}
+                          className="inline-block h-[24px] w-[24px] transition-colors duration-300 ease-in-out hover:text-[#0EA5E9]"
+                        >
+                          <BinIcon className="h-auto w-full" />
+                        </button>
                       </Tooltip>
                     </div>
                   </Td>
@@ -112,6 +112,12 @@ export const Clubs = () => {
           />
         </TableWrapper>
       )}
+      <AlertConfirmDelete
+        nameItems="articles"
+        isOpen={isOpen}
+        onCloseModal={onCloseAlert}
+        selectedItemId={selectedItemId}
+      />
     </>
   );
 };

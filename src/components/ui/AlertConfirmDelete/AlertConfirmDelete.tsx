@@ -1,3 +1,4 @@
+import { useDeleteArticle, useDeleteFootballer } from "@/api/hooks";
 import { Dialog } from "@headlessui/react";
 import { Button } from "../Button";
 import { Modal } from "../Modal";
@@ -7,7 +8,33 @@ export const AlertConfirmDelete = ({
   onCloseModal,
   isOpen,
   selectedItemId,
+  nameItems,
 }: IAlertConfirmDelete) => {
+  const { mutate: articleMutate, isLoading: articleIsLoading } =
+    useDeleteArticle();
+  const { mutate: footballerMutate, isLoading: footballerIsLoading } =
+    useDeleteFootballer();
+
+  const handleDeleteItem = () => {
+    if (selectedItemId) {
+      if (nameItems === "articles") {
+        articleMutate(selectedItemId, {
+          onSuccess: () => {
+            onCloseModal();
+          },
+        });
+      }
+
+      if (nameItems === "footballers") {
+        footballerMutate(selectedItemId, {
+          onSuccess: () => {
+            onCloseModal();
+          },
+        });
+      }
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} onCloseModal={onCloseModal}>
       <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
@@ -25,7 +52,14 @@ export const AlertConfirmDelete = ({
           >
             No
           </button>
-          <Button type="button" className="bg-[#EF4444]">
+          <Button
+            type="button"
+            onClick={handleDeleteItem}
+            isLoading={
+              nameItems === "articles" ? articleIsLoading : footballerIsLoading
+            }
+            className="bg-[#EF4444]"
+          >
             Yes
           </Button>
         </div>

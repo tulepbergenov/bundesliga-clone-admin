@@ -3,14 +3,18 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 const pageSize = 5;
 
-export const usePagination = (items: any[]) => {
+export const usePagination = (items: any[] = [], searchValue?: string) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemCount = items.length;
-
   useEffect(() => {
-    setCurrentPage(1);
-  }, [items]);
+    if (searchValue) {
+      if (searchValue !== "") {
+        setCurrentPage(1);
+      }
+    }
+  }, [searchValue]);
+
+  const itemCount = items?.length;
 
   const totalPages = Math.ceil(itemCount / pageSize);
 
