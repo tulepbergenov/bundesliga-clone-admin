@@ -120,7 +120,7 @@ export const Footballers = () => {
         </TableWrapper>
       )}
       <AlertConfirmDelete
-        nameItems="articles"
+        nameItems="footballers"
         isOpen={isOpen}
         onCloseModal={onCloseAlert}
         selectedItemId={selectedItemId}

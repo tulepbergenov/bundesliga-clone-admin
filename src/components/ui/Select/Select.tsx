@@ -24,7 +24,7 @@ export const Select = ({ value, items, onChange }: ISelect) => {
               className="absolute z-10 translate-y-[10px]"
             >
               {items.map((item) => (
-                <Listbox.Option key={item.id} value={item} as="li">
+                <Listbox.Option key={item} value={item.id} as="li">
                   {({ active, selected }) => (
                     <button type="button">{item.name}</button>
                   )}

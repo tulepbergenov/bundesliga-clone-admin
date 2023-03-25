@@ -1,6 +1,5 @@
 import {
   IEditFootballerFormData,
-  IEditFootballerResponse,
   IFootballerFormData,
   IFootballersResponse,
 } from "@/interfaces";
@@ -15,10 +14,7 @@ const getFootballer = (id: number) => api.get(`/footballers/${id}`);
 const addFootballer = (data: IFootballerFormData) =>
   api.post("/footballers/create", data);
 
-const editFootballer = (
-  data: IEditFootballerFormData,
-  id: number
-): Promise<AxiosResponse<IEditFootballerResponse>> =>
+const editFootballer = (data: IEditFootballerFormData, id: number) =>
   api.put(`/footballers/${id}`, data);
 
 const deleteFootballer = (id: number) => api.delete(`/footballers/${id}`);

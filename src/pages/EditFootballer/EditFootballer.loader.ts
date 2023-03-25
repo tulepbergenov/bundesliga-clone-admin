@@ -1,6 +1,6 @@
 import { clubService, footballerService } from "@/api";
 
-export const footballerLoader = async ({ params }: any) => {
+export const editFootballerLoader = async ({ params }: any) => {
   const footballer = await footballerService.getFootballer(params.footballerId);
   const clubs = await clubService.getClubs();
 

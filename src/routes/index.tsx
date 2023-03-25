@@ -3,6 +3,7 @@ import {
   AddArticle,
   AddClub,
   AddFootballer,
+  addFootballerLoader,
   Article,
   articleLoader,
   Articles,
@@ -11,6 +12,7 @@ import {
   Clubs,
   EditArticle,
   EditFootballer,
+  editFootballerLoader,
   Footballer,
   footballerLoader,
   Footballers,
@@ -76,6 +78,8 @@ export const router = createBrowserRouter([
       {
         path: "/footballers/add",
         element: <AddFootballer />,
+        loader: addFootballerLoader,
+        errorElement: <PageNotFound />,
       },
       {
         path: "/footballers/:footballerId",
@@ -86,7 +90,7 @@ export const router = createBrowserRouter([
       {
         path: "/footballers/:footballerId/edit",
         element: <EditFootballer />,
-        loader: footballerLoader,
+        loader: editFootballerLoader,
         errorElement: <PageNotFound />,
       },
       {
